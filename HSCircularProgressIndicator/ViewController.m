@@ -84,6 +84,4 @@
     [circularProgressIndicator reset];
 }
 
-
-
 @end
