@@ -8,6 +8,8 @@
 
 #import "HSCircularProgressIndicator.h"
 
+#define ANIMATION_DURATION 1.0
+
 @interface HSCircularProgressIndicator ()
 
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
@@ -40,7 +42,7 @@
     return [UIBezierPath bezierPathWithArcCenter:self.center radius:radius startAngle:0 endAngle:2 * M_PI clockwise:YES].CGPath;
 }
 
-#pragma mark - setter方法：展示实时下载进度
+#pragma mark - setter方法：展示图片的实时下载进度
 - (void)setProgress:(CGFloat)progress {
     
     _progress = progress;
@@ -82,7 +84,7 @@
     CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
     animationGroup.delegate = self;
     animationGroup.animations = @[pathBasicAnimation, lineWidthBasicAnimation];
-    animationGroup.duration = 1.0;
+    animationGroup.duration = ANIMATION_DURATION;
     animationGroup.removedOnCompletion = NO;
     animationGroup.fillMode = kCAFillModeForwards;
     
