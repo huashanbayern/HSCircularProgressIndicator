@@ -8,7 +8,8 @@
 
 #import "HSCircularProgressIndicator.h"
 
-#define ANIMATION_DURATION 1.0
+static const CGFloat originalCirclePathRadius = 25.0;
+static const CGFloat animationGroupDuration = 1.0;
 
 @interface HSCircularProgressIndicator ()
 
@@ -30,7 +31,7 @@
         _shapeLayer.strokeColor = [UIColor blueColor].CGColor;
         _shapeLayer.lineWidth = 5.0;
         _shapeLayer.strokeEnd = 0.0;
-        _shapeLayer.path = [self circlePathWithRadius:25.0];
+        _shapeLayer.path = [self circlePathWithRadius:originalCirclePathRadius];
     }
     
     return _shapeLayer;
@@ -66,10 +67,10 @@
     
     self.backgroundColor = [UIColor clearColor];
     
-    [self.shapeLayer removeAllAnimations];
+    self.shapeLayer.strokeEnd = 1.0;
+    [_shapeLayer removeAllAnimations];
     [_shapeLayer removeFromSuperlayer];
     self.superview.layer.mask = _shapeLayer;
-    _shapeLayer.strokeEnd = 1.0;
     
     CGFloat selfHalfWidth = self.frame.size.width * 0.5;
     CGFloat selfHalfHeight = self.frame.size.height * 0.5;
@@ -84,7 +85,7 @@
     CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
     animationGroup.delegate = self;
     animationGroup.animations = @[pathBasicAnimation, lineWidthBasicAnimation];
-    animationGroup.duration = ANIMATION_DURATION;
+    animationGroup.duration = animationGroupDuration;
     animationGroup.removedOnCompletion = NO;
     animationGroup.fillMode = kCAFillModeForwards;
     

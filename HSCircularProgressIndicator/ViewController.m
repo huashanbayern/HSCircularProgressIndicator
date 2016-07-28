@@ -58,12 +58,11 @@
     
     [_imageView sd_setImageWithPreviousCachedImageWithURL:[NSURL URLWithString:[@"http://d.hiphotos.baidu.com/zhidao/pic/item/3b87e950352ac65c1b6a0042f9f2b21193138a97.jpg" stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
         
-        circularProgressIndicator.progress = (CGFloat)receivedSize / expectedSize;
+        circularProgressIndicator.progress = (CGFloat)receivedSize / (CGFloat)expectedSize;
         
     } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-       
-        [circularProgressIndicator revealAnimation];
         
+        [circularProgressIndicator revealAnimation];
     }];
 }
 
