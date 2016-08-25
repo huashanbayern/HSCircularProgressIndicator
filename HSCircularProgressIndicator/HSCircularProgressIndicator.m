@@ -97,6 +97,16 @@ static const CGFloat animationGroupDuration = 1.0;
         
     [self.shapeLayer removeAllAnimations];
     self.superview.layer.mask = nil;
+    
+    if (!self.layer.sublayers) {
+        
+        [CATransaction begin];
+        [CATransaction setDisableActions:YES];
+        _shapeLayer.strokeEnd = 0.0;
+        [CATransaction commit];
+        
+        [self.layer addSublayer:_shapeLayer];
+    }
 }
 
 #pragma mark - 重置
